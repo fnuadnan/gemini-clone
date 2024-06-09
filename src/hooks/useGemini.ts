@@ -28,6 +28,9 @@ const useGemini = () => {
     showResult,
     loading,
     resultData,
+    setShowResult,
+    setLoading,
+    setResultData,
   };
 };
 

@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
 import { assets } from "../../assets/assets";
+import { FormValues } from "../../entities/entities";
 import useGemini from "../../hooks/useGemini";
 import "./Main.css";
 
 const Main = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormValues>();
   const { handleSent } = useGemini();
 
-  const onSubmit = (data) => {
-    handleSent(data);
+  const onSubmit = (data: FormValues) => {
+    handleSent(data.input);
   };
 
   return (
