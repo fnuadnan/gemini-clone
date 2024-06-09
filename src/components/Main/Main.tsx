@@ -1,7 +1,16 @@
+import { useForm } from "react-hook-form";
 import { assets } from "../../assets/assets";
+import useGemini from "../../hooks/useGemini";
 import "./Main.css";
 
 const Main = () => {
+  const { register, handleSubmit } = useForm();
+  const { handleSent } = useGemini();
+
+  const onSubmit = (data) => {
+    handleSent(data);
+  };
+
   return (
     <div className="main">
       <div className="nav">
@@ -34,14 +43,21 @@ const Main = () => {
           </div>
         </div>
         <div className="main-bottom">
-          <div className="search-box">
-            <input type="text" placeholder="Enter a prompt here" />
-            <div>
-              <img src={assets.gallery_icon} alt="" />
-              <img src={assets.mic_icon} alt="" />
-              <img src={assets.send_icon} alt="" />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="search-box">
+              <input
+                type="text"
+                placeholder="Enter a prompt here"
+                {...register("input")}
+              />
+              <div>
+                <img src={assets.gallery_icon} alt="" />
+                <img src={assets.mic_icon} alt="" />
+                <img src={assets.send_icon} alt="" />
+              </div>
             </div>
-          </div>
+          </form>
+
           <p className="bottom-info">
             Gemini may display innacurate info, including about people, so
             double-check its responses. Your privacy and Gemini Apps
