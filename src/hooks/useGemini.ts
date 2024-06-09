@@ -15,7 +15,8 @@ const useGemini = () => {
     try {
       setResultData(""); // reset data
       setLoading(true); // show loading
-      setShowResult(true);
+      setShowResult(true); // show the result and remove the hello dev
+      setRecentPrompt(input); // the input
 
       const apiResponse = await apiclient.post(input); // response
 
