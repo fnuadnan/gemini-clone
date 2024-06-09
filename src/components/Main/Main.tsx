@@ -6,7 +6,7 @@ import "./Main.css";
 
 const Main = () => {
   const { register, handleSubmit, reset } = useForm<FormValues>();
-  const { onSent, showResult, recentPrompt, resultData } = useGemini();
+  const { onSent, showResult, recentPrompt, resultData, loading } = useGemini();
 
   const onSubmit = (data: FormValues) => {
     onSent(data.input);
@@ -57,7 +57,15 @@ const Main = () => {
             </div>
             <div className="result-data">
               <img src={assets.gemini_icon} alt="" />
-              <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+              {loading ? (
+                <div className="loader">
+                  <hr />
+                  <hr />
+                  <hr />
+                </div>
+              ) : (
+                <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+              )}
             </div>
           </div>
         )}
