@@ -5,11 +5,13 @@ import useGemini from "../../hooks/useGemini";
 import "./Main.css";
 
 const Main = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
-  const { handleSent } = useGemini();
+  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const { onSent } = useGemini();
 
   const onSubmit = (data: FormValues) => {
-    handleSent(data.input);
+    onSent(data.input);
+    console.log(data.input);
+    reset();
   };
 
   return (
@@ -54,7 +56,11 @@ const Main = () => {
               <div>
                 <img src={assets.gallery_icon} alt="" />
                 <img src={assets.mic_icon} alt="" />
-                <img src={assets.send_icon} alt="" />
+                <img
+                  onClick={() => handleSubmit(onSubmit)()}
+                  src={assets.send_icon}
+                  alt=""
+                />
               </div>
             </div>
           </form>

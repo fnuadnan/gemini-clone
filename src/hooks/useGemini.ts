@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { APIResponse } from "../entities/entities";
 import APIClient from "../services/api-client";
 
-const apiclient = new APIClient("/gemini");
+const apiclient = new APIClient<APIResponse>("/gemini");
 
 const useGemini = () => {
   const [recentPrompt, setRecentPrompt] = useState("");
@@ -10,17 +11,23 @@ const useGemini = () => {
   const [loading, setLoading] = useState(false); // showing the loading animation
   const [resultData, setResultData] = useState(""); // display result on webpage
 
-  const handleSent = async (input: string) => {
+  const onSent = async (input: string) => {
     try {
-      const apiResponse = await apiclient.post(input);
-      console.log(apiResponse);
+      setResultData(""); // reset data
+      setLoading(true); // show loading
+      setShowResult(true);
+
+      const apiResponse = await apiclient.post(input); // response
+
+      setResultData(apiResponse.response); // show the result
+      setLoading(false); // take off the loading
     } catch (error) {
       console.log(error);
     }
   };
 
   return {
-    handleSent,
+    onSent,
     recentPrompt,
     setRecentPrompt,
     prevPrompts,
