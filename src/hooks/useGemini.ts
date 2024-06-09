@@ -11,6 +11,13 @@ const useGemini = () => {
   const [loading, setLoading] = useState(false); // showing the loading animation
   const [resultData, setResultData] = useState(""); // display result on webpage
 
+  // function to delay the typing effect
+  const delapPara = (index: number, nextWord: string) => {
+    setTimeout(() => {
+      setResultData((prev) => prev + nextWord);
+    }, 75 * index);
+  };
+
   const onSent = async (input: string) => {
     try {
       setResultData(""); // reset data
@@ -32,7 +39,13 @@ const useGemini = () => {
       }
       const newResponse2 = newResponse.split("*").join("</br>");
 
-      setResultData(newResponse2); // show the result
+      // split the response string into an array of words and delay the typing effect
+      const newResponseArray = newResponse2.split(" ");
+      for (let i = 0; i < newResponseArray.length; i++) {
+        const nextWord = newResponseArray[i];
+        delapPara(i, nextWord + " ");
+      }
+
       setLoading(false); // take off the loading
     } catch (error) {
       console.log(error);
