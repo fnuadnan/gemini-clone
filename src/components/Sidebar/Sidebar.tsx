@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { assets } from "../../assets/assets";
+import useGemini from "../../hooks/useGemini";
 import "./Sidebar.css";
 
 const Sidebar = () => {
   const [extended, setExtended] = useState(false);
+  const { prevPrompts } = useGemini();
 
   return (
     <div className="sidebar">
@@ -21,10 +23,12 @@ const Sidebar = () => {
         {extended ? (
           <div className="recent">
             <p className="recent-title">Recent</p>
-            <div className="recent-entry">
-              <img src={assets.message_icon} alt="" />
-              <p>What is react ...</p>
-            </div>
+            {prevPrompts.map((prompt, index) => (
+              <div key={index} className="recent-entry">
+                <img src={assets.message_icon} alt="" />
+                <p>{prompt.slice(0, 18)} ...</p>
+              </div>
+            ))}
           </div>
         ) : null}
       </div>
