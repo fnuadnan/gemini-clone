@@ -4,13 +4,17 @@ import { FormValues } from "../../entities/entities";
 import useGemini from "../../hooks/useGemini";
 import "./Main.css";
 
-const Main = () => {
+interface MainProps {
+  setPrevPrompts: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+const Main = ({ setPrevPrompts }: MainProps) => {
   const { register, handleSubmit, reset } = useForm<FormValues>();
   const { onSent, showResult, recentPrompt, resultData, loading } = useGemini();
 
   const onSubmit = (data: FormValues) => {
     onSent(data.input);
-    console.log(data.input);
+    setPrevPrompts((prev) => [data.input, ...prev]); // Add the new prompt to the prevPrompts list
     reset();
   };
 
@@ -69,7 +73,6 @@ const Main = () => {
             </div>
           </div>
         )}
-
         <div className="main-bottom">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="search-box">
@@ -89,7 +92,6 @@ const Main = () => {
               </div>
             </div>
           </form>
-
           <p className="bottom-info">
             Gemini may display innacurate info, including about people, so
             double-check its responses. Your privacy and Gemini Apps

@@ -6,7 +6,6 @@ const apiclient = new APIClient<APIResponse>("/gemini");
 
 const useGemini = () => {
   const [recentPrompt, setRecentPrompt] = useState("");
-  const [prevPrompts, setPrevPrompts] = useState<string[]>([]); // store all the input history and display in recent tab
   const [showResult, setShowResult] = useState(false); // will hide the: hello dev , and display the result
   const [loading, setLoading] = useState(false); // showing the loading animation
   const [resultData, setResultData] = useState(""); // display result on webpage
@@ -24,7 +23,6 @@ const useGemini = () => {
       setLoading(true); // show loading
       setShowResult(true); // show the result and remove the hello dev
       setRecentPrompt(input); // the input
-      setPrevPrompts((prev) => [...prev, input]); // insert the input here and show in sidebar
 
       const apiResponse = await apiclient.post(input); // response
 
@@ -57,8 +55,6 @@ const useGemini = () => {
     onSent,
     recentPrompt,
     setRecentPrompt,
-    prevPrompts,
-    setPrevPrompts,
     showResult,
     loading,
     resultData,

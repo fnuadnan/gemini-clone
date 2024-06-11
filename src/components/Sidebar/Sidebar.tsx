@@ -3,9 +3,18 @@ import { assets } from "../../assets/assets";
 import useGemini from "../../hooks/useGemini";
 import "./Sidebar.css";
 
-const Sidebar = () => {
+interface SidebarProps {
+  prevPrompts: string[];
+}
+
+const Sidebar = ({ prevPrompts }: SidebarProps) => {
   const [extended, setExtended] = useState(false);
-  const { prevPrompts } = useGemini();
+  const { onSent } = useGemini();
+
+  // function to load the prompt when clicked
+  const loadPrompt = async (prompt: string) => {
+    await onSent(prompt);
+  };
 
   return (
     <div className="sidebar">
@@ -24,7 +33,11 @@ const Sidebar = () => {
           <div className="recent">
             <p className="recent-title">Recent</p>
             {prevPrompts.map((prompt, index) => (
-              <div key={index} className="recent-entry">
+              <div
+                onClick={() => loadPrompt(prompt)}
+                key={index}
+                className="recent-entry"
+              >
                 <img src={assets.message_icon} alt="" />
                 <p>{prompt.slice(0, 18)} ...</p>
               </div>
