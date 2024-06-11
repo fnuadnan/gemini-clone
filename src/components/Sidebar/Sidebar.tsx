@@ -9,11 +9,12 @@ interface SidebarProps {
 
 const Sidebar = ({ prevPrompts }: SidebarProps) => {
   const [extended, setExtended] = useState(false);
-  const { onSent } = useGemini();
+  const { onSent, setRecentPrompt } = useGemini();
 
   // function to load the prompt when clicked
   const loadPrompt = async (prompt: string) => {
-    await onSent(prompt);
+    setRecentPrompt(prompt);
+    await onSent("", prompt);
   };
 
   return (

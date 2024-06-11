@@ -17,14 +17,24 @@ const useGemini = () => {
     }, 75 * index);
   };
 
-  const onSent = async (input: string) => {
+  const onSent = async (input: string, prompt?: string) => {
     try {
       setResultData(""); // reset data
       setLoading(true); // show loading
       setShowResult(true); // show the result and remove the hello dev
+
+      let responseText;
+      if (prompt !== undefined) {
+        responseText = prompt;
+        setRecentPrompt(prompt);
+      } else {
+        responseText = input;
+        setRecentPrompt(input);
+      }
+
       setRecentPrompt(input); // the input
 
-      const apiResponse = await apiclient.post(input); // response
+      const apiResponse = await apiclient.post(responseText); // response
 
       // make the response bold and line break after each ** and * in the response string from the api
       const responseArray = apiResponse.response.split("**");
