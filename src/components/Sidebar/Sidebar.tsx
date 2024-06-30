@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { assets } from "../../assets/assets";
-import useGemini from "../../hooks/useGemini";
 import "./Sidebar.css";
 
 interface SidebarProps {
   prevPrompts: string[];
+  onSent: (input: string) => void;
 }
 
-const Sidebar = ({ prevPrompts }: SidebarProps) => {
+const Sidebar = ({ prevPrompts, onSent }: SidebarProps) => {
   const [extended, setExtended] = useState(false);
-  const { onSent, setRecentPrompt } = useGemini();
 
   // function to load the prompt when clicked
   const loadPrompt = async (prompt: string) => {
-    setRecentPrompt(prompt);
-    await onSent("", prompt);
+    onSent(prompt);
   };
 
   return (

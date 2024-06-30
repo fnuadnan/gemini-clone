@@ -1,21 +1,38 @@
 import { useForm } from "react-hook-form";
 import { assets } from "../../assets/assets";
 import { FormValues } from "../../entities/entities";
-import useGemini from "../../hooks/useGemini";
 import "./Main.css";
 
 interface MainProps {
   setPrevPrompts: React.Dispatch<React.SetStateAction<string[]>>;
+
+  onSent: (input: string) => void;
+  showResult: boolean;
+  recentPrompt: string;
+  resultData: string;
+  loading: boolean;
 }
 
-const Main = ({ setPrevPrompts }: MainProps) => {
-  const { register, handleSubmit, reset } = useForm<FormValues>();
-  const { onSent, showResult, recentPrompt, resultData, loading } = useGemini();
+const Main = ({
+  setPrevPrompts,
+  onSent,
+  showResult,
+  recentPrompt,
+  resultData,
+  loading,
+}: MainProps) => {
 
+  // Get the input value from the form
+  const { register, handleSubmit, reset, watch } = useForm<FormValues>();
+
+  // Get the input value from the form
+  const input = watch("input");
+
+  // Function to handle the form submission
   const onSubmit = (data: FormValues) => {
     onSent(data.input);
     setPrevPrompts((prev) => [data.input, ...prev]); // Add the new prompt to the prevPrompts list
-    reset();
+    reset({ input: "" });
   };
 
   return (
@@ -79,16 +96,20 @@ const Main = ({ setPrevPrompts }: MainProps) => {
               <input
                 type="text"
                 placeholder="Enter a prompt here"
+                autoComplete="off"
                 {...register("input")}
               />
               <div>
                 <img src={assets.gallery_icon} alt="" />
                 <img src={assets.mic_icon} alt="" />
-                <img
-                  onClick={() => handleSubmit(onSubmit)()}
-                  src={assets.send_icon}
-                  alt=""
-                />
+                {input &&
+                  input.trim() !== "" && ( // Only show the send icon if the input is not empty
+                    <img
+                      onClick={() => handleSubmit(onSubmit)()}
+                      src={assets.send_icon}
+                      alt=""
+                    />
+                  )}
               </div>
             </div>
           </form>
