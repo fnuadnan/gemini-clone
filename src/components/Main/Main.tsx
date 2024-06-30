@@ -30,6 +30,10 @@ const Main = ({
 
   // Function to handle the form submission
   const onSubmit = (data: FormValues) => {
+    // If the input is empty, return
+    if (!data.input || data.input.trim() === "") {
+      return;
+    }
     onSent(data.input);
     setPrevPrompts((prev) => [data.input, ...prev]); // Add the new prompt to the prevPrompts list
     reset({ input: "" });
