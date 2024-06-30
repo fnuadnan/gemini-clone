@@ -26,7 +26,7 @@ const Sidebar = ({ prevPrompts }: SidebarProps) => {
           src={assets.menu_icon}
           alt=""
         />
-        <div className="new-chat">
+        <div className="new-chat" onClick={() => window.location.reload()}>
           <img src={assets.plus_icon} alt="" />
           {extended ? <p>New Chat</p> : null}
         </div>
@@ -46,6 +46,8 @@ const Sidebar = ({ prevPrompts }: SidebarProps) => {
           </div>
         ) : null}
       </div>
+
+      {/* this is bottom section (icons)*/}
       <div className="bottom">
         <div className="bottom-item recent-entry">
           <img src={assets.question_icon} alt="" />

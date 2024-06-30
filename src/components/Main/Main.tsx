@@ -32,7 +32,7 @@ const Main = ({ setPrevPrompts }: MainProps) => {
               <p>
                 <span>Hello, Dev.</span>
               </p>
-              <p>How an I help you today?</p>
+              <p>How can I help you today?</p>
             </div>
             <div className="cards">
               <div className="card">
