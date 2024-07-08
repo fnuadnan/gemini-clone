@@ -46,8 +46,7 @@ const Main = ({
       </div>
       <div className="main-container">
         {!showResult ? (
-          <>
-            {" "}
+          <div className="container">
             <div className="greet">
               <p>
                 <span>Hello, Dev.</span>
@@ -66,7 +65,7 @@ const Main = ({
                 </div>
               ))}
             </div>
-          </>
+          </div>
         ) : (
           <div className="result">
             <div className="result-title">
@@ -134,7 +133,7 @@ const cards = [
     icon: assets.message_icon,
   },
   {
-    title: "Improve the readability of the following code",
+    title: "Improve the readability of the following code: x = x + 1",
     icon: assets.code_icon,
   },
 ];
