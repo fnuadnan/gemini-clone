@@ -21,7 +21,6 @@ const Main = ({
   resultData,
   loading,
 }: MainProps) => {
-
   // Get the input value from the form
   const { register, handleSubmit, reset, watch } = useForm<FormValues>();
 
@@ -56,22 +55,16 @@ const Main = ({
               <p>How can I help you today?</p>
             </div>
             <div className="cards">
-              <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
-                <img src={assets.compass_icon} alt="" />
-              </div>
-              <div className="card">
-                <p>Briefly summarize this concept: urban planning</p>
-                <img src={assets.bulb_icon} alt="" />
-              </div>
-              <div className="card">
-                <p>Brainstorm team bonding activities for our work retreat</p>
-                <img src={assets.message_icon} alt="" />
-              </div>
-              <div className="card">
-                <p>Improve the readability of the following code</p>
-                <img src={assets.code_icon} alt="" />
-              </div>
+              {cards.map((card, index) => (
+                <div
+                  key={index}
+                  className="card"
+                  onClick={() => onSubmit({ input: card.title })}
+                >
+                  <p>{card.title}</p>
+                  <img src={card.icon} alt="" />
+                </div>
+              ))}
             </div>
           </>
         ) : (
@@ -126,5 +119,24 @@ const Main = ({
     </div>
   );
 };
+
+const cards = [
+  {
+    title: "Suggest beautiful places to see on an upcoming road trip",
+    icon: assets.compass_icon,
+  },
+  {
+    title: "Briefly summarize this concept: urban planning",
+    icon: assets.bulb_icon,
+  },
+  {
+    title: "Brainstorm team bonding activities for our work retreat",
+    icon: assets.message_icon,
+  },
+  {
+    title: "Improve the readability of the following code",
+    icon: assets.code_icon,
+  },
+];
 
 export default Main;

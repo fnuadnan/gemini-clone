@@ -30,6 +30,9 @@
 	color: grey;
 	cursor: pointer;
 }
+.sidebar .new-chat:hover {
+	background-color: #dfe4ea;
+}
 
 .sidebar .recent {
 	display: flex;
