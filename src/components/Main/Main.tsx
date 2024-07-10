@@ -49,7 +49,7 @@ const Main = ({
       </div>
       <div className="main-container">
         {!showResult ? (
-          <div className="container">
+          <div>
             <div className="greet">
               <p>
                 <span>Hello, Dev.</span>
