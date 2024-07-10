@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { assets } from "../../assets/assets";
 import { FormValues } from "../../entities/entities";
+import useMsgEnd from "../../hooks/useMsgEnd";
 import "./Main.css";
 
 interface MainProps {
@@ -38,6 +39,8 @@ const Main = ({
     reset({ input: "" });
   };
 
+  // Scroll to the bottom of the messages
+  const msgEndRef = useMsgEnd(resultData);
   return (
     <div className="main">
       <div className="nav">
@@ -84,6 +87,7 @@ const Main = ({
                 <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
               )}
             </div>
+            <div ref={msgEndRef} /> {/* Scroll to the bottom of the messages */}
           </div>
         )}
         <div className="main-bottom">
