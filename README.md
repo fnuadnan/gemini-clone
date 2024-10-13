@@ -3,6 +3,9 @@
 ## Project Description
 The Gemini Clone App is a web application that mimics the functionalities of the Gemini app. It allows users to interact with a chatbot, view recent prompts, and see detailed responses with a typing effect.
 
+## Figma Design
+https://www.figma.com/design/PkNIChq8DbzwGAh3KHRSqK/Gemini-Clone?node-id=0-1&node-type=canvas&t=8zJSh9qHf7CRZd1b-0
+
 ## Features
 - **Chatbot Interaction:** Users can enter prompts and receive detailed responses from the chatbot.
 - **Recent Prompts:** The app displays a list of recent prompts for easy access.
